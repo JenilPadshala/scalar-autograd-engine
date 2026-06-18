@@ -1,10 +1,10 @@
 #include "Value.h"
+
 #include "Function.h"
 
-
 // Overloading the '+' operator
-std::shared_ptr<Value> operator+(const std::shared_ptr<Value> &lhs, const std::shared_ptr<Value> &rhs)
-{
+std::shared_ptr<Value> operator+(const std::shared_ptr<Value>& lhs,
+                                 const std::shared_ptr<Value>& rhs) {
   double out_data = lhs->data + rhs->data;
   // Create the AddNode context wrapper
   auto ctx = std::make_shared<AddNode>(lhs, rhs);
@@ -16,8 +16,8 @@ std::shared_ptr<Value> operator+(const std::shared_ptr<Value> &lhs, const std::s
 }
 
 // Overloading the '*' operator
-std::shared_ptr<Value> operator*(const std::shared_ptr<Value> &lhs, const std::shared_ptr<Value> &rhs)
-{
+std::shared_ptr<Value> operator*(const std::shared_ptr<Value>& lhs,
+                                 const std::shared_ptr<Value>& rhs) {
   double out_data = lhs->data * rhs->data;
 
   // Create the MulNode context wrapper
@@ -28,4 +28,3 @@ std::shared_ptr<Value> operator*(const std::shared_ptr<Value> &lhs, const std::s
   // Return the new Value node pointing to its creator (MulNode)
   return out_val;
 }
-

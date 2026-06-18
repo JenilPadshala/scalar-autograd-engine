@@ -1,27 +1,27 @@
-#include "Value.h"
-#include "Engine.h"
 #include <iostream>
 #include <memory>
 
-int main()
-{
-    std::cout << "--- Initializing Autograd Engine Test ---" << std::endl;
+#include "Engine.h"
+#include "Value.h"
 
-    // L = (x * y) + bias
-    auto x = std::make_shared<Value>(2.0);
-    auto y = std::make_shared<Value>(3.0);
-    auto bias = std::make_shared<Value>(10.0);
+int main() {
+  std::cout << "--- Initializing Autograd Engine Test ---" << std::endl;
 
-    auto L = (x * y) + bias;
+  // L = (x * y) + bias
+  auto x = std::make_shared<Value>(2.0);
+  auto y = std::make_shared<Value>(3.0);
+  auto bias = std::make_shared<Value>(10.0);
 
-    std::cout << "Forward Pass Output (L): " << L->data << std::endl;
+  auto L = (x * y) + bias;
 
-    Autograd::backward(L);
+  std::cout << "Forward Pass Output (L): " << L->data << std::endl;
 
-    std::cout << "\n--- Gradient Verification ---" << std::endl;
-    std::cout << "dL / dBias : " << bias->grad << " (Expected: 1.0)" << std::endl;
-    std::cout << "dL / dY    : " << y->grad << " (Expected: 2.0)" << std::endl;
-    std::cout << "dL / dX    : " << x->grad << " (Expected: 3.0)" << std::endl;
+  Autograd::backward(L);
 
-    return 0;
+  std::cout << "\n--- Gradient Verification ---" << std::endl;
+  std::cout << "dL / dBias : " << bias->grad << " (Expected: 1.0)" << std::endl;
+  std::cout << "dL / dY    : " << y->grad << " (Expected: 2.0)" << std::endl;
+  std::cout << "dL / dX    : " << x->grad << " (Expected: 3.0)" << std::endl;
+
+  return 0;
 }
