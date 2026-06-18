@@ -1,11 +1,10 @@
 #pragma once
+#include "Value.h"
 #include <memory>
 #include <vector>
 
-#include "Value.h"
-
 class Function {
- public:
+public:
   // All the Value nodes that are inputs to this operation
   std::vector<std::shared_ptr<Value>> inputs;
   // Weak pointer to the output Value node of this operation (to avoid circular
@@ -22,13 +21,26 @@ class Function {
 
 // -- Concrete Operation Declarations --
 class AddNode : public Function {
- public:
+public:
   AddNode(std::shared_ptr<Value> a, std::shared_ptr<Value> b);
   void backward(double output_grad) override;
 };
 
 class MulNode : public Function {
- public:
+public:
   MulNode(std::shared_ptr<Value> a, std::shared_ptr<Value> b);
+  void backward(double output_grad) override;
+};
+
+class NegNode : public Function {
+public:
+  NegNode(std::shared_ptr<Value> a);
+  void backward(double output_grad) override;
+};
+
+class PowNode : public Function {
+public:
+  double exponent;
+  PowNode(std::shared_ptr<Value> a, double exp);
   void backward(double output_grad) override;
 };

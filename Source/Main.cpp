@@ -1,18 +1,17 @@
-#include <iostream>
-#include <memory>
-
 #include "Engine.h"
 #include "Value.h"
+#include <iostream>
+#include <memory>
 
 int main() {
   std::cout << "--- Initializing Autograd Engine Test ---" << std::endl;
 
   // L = (x * y) + bias
-  auto x = std::make_shared<Value>(2.0);
-  auto y = std::make_shared<Value>(3.0);
-  auto bias = std::make_shared<Value>(10.0);
+  auto x = std::make_shared<Value>(10.0);
+  auto y = std::make_shared<Value>(4.0);
+  auto bias = std::make_shared<Value>(2.0);
 
-  auto L = (x * y) + bias;
+  auto L = (x - y) / bias;
 
   std::cout << "Forward Pass Output (L): " << L->data << std::endl;
 

@@ -1,12 +1,10 @@
 #include "Engine.h"
-
+#include "Function.h"
 #include <unordered_set>
 #include <vector>
 
-#include "Function.h"
-
 namespace Autograd {
-void backward(const std::shared_ptr<Value>& loss) {
+void backward(const std::shared_ptr<Value> &loss) {
   // Initialize the topological sort containers
   std::vector<std::shared_ptr<Function>> topo;
   std::unordered_set<std::shared_ptr<Function>> visited;
@@ -22,7 +20,7 @@ void backward(const std::shared_ptr<Value>& loss) {
 
   // Run the Iterative DFS Loop to populate 'topo'
   while (!stack.empty()) {
-    auto& [curr_func, children_processed] = stack.back();
+    auto &[curr_func, children_processed] = stack.back();
 
     if (children_processed) {
       // All children of curr_func have been processed, we can add it to topo
@@ -37,7 +35,7 @@ void backward(const std::shared_ptr<Value>& loss) {
         visited.insert(curr_func);
 
         // Go through all input Value nodes of this function
-        for (const auto& input_val : curr_func->inputs) {
+        for (const auto &input_val : curr_func->inputs) {
           // If input_val is Internal Node and the creator function has not been
           // visited, push it onto the stack
           if (input_val && input_val->creator) {
@@ -57,7 +55,7 @@ void backward(const std::shared_ptr<Value>& loss) {
   }
 
   for (auto it = topo.rbegin(); it != topo.rend(); ++it) {
-    auto& func = *it;
+    auto &func = *it;
 
     // Upgrade the weak_ptr to a shared_ptr to safely access its data
     if (auto out_node = func->output.lock()) {
@@ -66,4 +64,4 @@ void backward(const std::shared_ptr<Value>& loss) {
     }
   }
 }
-}  // namespace Autograd
+} // namespace Autograd

@@ -5,7 +5,7 @@
 class Function;
 
 class Value : public std::enable_shared_from_this<Value> {
- public:
+public:
   double data;
   double grad;
   std::shared_ptr<Function> creator;
@@ -19,8 +19,8 @@ class Value : public std::enable_shared_from_this<Value> {
 };
 
 // Global operator overload for easy std::cout printing
-inline std::ostream& operator<<(std::ostream& os,
-                                const std::shared_ptr<Value>& val) {
+inline std::ostream &operator<<(std::ostream &os,
+                                const std::shared_ptr<Value> &val) {
   if (val) {
     os << "Value(data=" << val->data << ", grad=" << val->grad << ")";
   } else {
@@ -30,7 +30,16 @@ inline std::ostream& operator<<(std::ostream& os,
 }
 
 // Declarations
-std::shared_ptr<Value> operator+(const std::shared_ptr<Value>& lhs,
-                                 const std::shared_ptr<Value>& rhs);
-std::shared_ptr<Value> operator*(const std::shared_ptr<Value>& lhs,
-                                 const std::shared_ptr<Value>& rhs);
+std::shared_ptr<Value> operator+(const std::shared_ptr<Value> &lhs,
+                                 const std::shared_ptr<Value> &rhs);
+
+std::shared_ptr<Value> operator*(const std::shared_ptr<Value> &lhs,
+                                 const std::shared_ptr<Value> &rhs);
+
+std::shared_ptr<Value> operator-(const std::shared_ptr<Value> &val);
+
+std::shared_ptr<Value> operator-(const std::shared_ptr<Value> &lhs,
+                                 const std::shared_ptr<Value> &rhs);
+
+std::shared_ptr<Value> operator/(const std::shared_ptr<Value> &lhs,
+                                 const std::shared_ptr<Value> &rhs);
