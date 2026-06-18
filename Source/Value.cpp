@@ -53,3 +53,47 @@ std::shared_ptr<Value> operator/(const std::shared_ptr<Value> &lhs,
   ctx->output = inverse_rhs;
   return lhs * inverse_rhs;
 }
+
+// Addition mixins
+std::shared_ptr<Value> operator+(double lhs,
+                                 const std::shared_ptr<Value> &rhs) {
+  return std::make_shared<Value>(lhs) + rhs;
+}
+
+std::shared_ptr<Value> operator+(const std::shared_ptr<Value> &lhs,
+                                 double rhs) {
+  return lhs + std::make_shared<Value>(rhs);
+}
+
+// Multiplication mixins
+std::shared_ptr<Value> operator*(double lhs,
+                                 const std::shared_ptr<Value> &rhs) {
+  return std::make_shared<Value>(lhs) * rhs;
+}
+
+std::shared_ptr<Value> operator*(const std::shared_ptr<Value> &lhs,
+                                 double rhs) {
+  return lhs * std::make_shared<Value>(rhs);
+}
+
+// Subtraction mixins
+std::shared_ptr<Value> operator-(double lhs,
+                                 const std::shared_ptr<Value> &rhs) {
+  return std::make_shared<Value>(lhs) - rhs;
+}
+
+std::shared_ptr<Value> operator-(const std::shared_ptr<Value> &lhs,
+                                 double rhs) {
+  return lhs - std::make_shared<Value>(rhs);
+}
+
+// Division mixins
+std::shared_ptr<Value> operator/(double lhs,
+                                 const std::shared_ptr<Value> &rhs) {
+  return std::make_shared<Value>(lhs) / rhs;
+}
+
+std::shared_ptr<Value> operator/(const std::shared_ptr<Value> &lhs,
+                                 double rhs) {
+  return lhs / std::make_shared<Value>(rhs);
+}

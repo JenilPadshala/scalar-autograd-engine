@@ -43,3 +43,19 @@ std::shared_ptr<Value> operator-(const std::shared_ptr<Value> &lhs,
 
 std::shared_ptr<Value> operator/(const std::shared_ptr<Value> &lhs,
                                  const std::shared_ptr<Value> &rhs);
+
+// Mixins for Addition
+std::shared_ptr<Value> operator+(double lhs, const std::shared_ptr<Value> &rhs);
+std::shared_ptr<Value> operator+(const std::shared_ptr<Value> &lhs, double rhs);
+
+// Mixins for Multiplication
+std::shared_ptr<Value> operator*(double lhs, const std::shared_ptr<Value> &rhs);
+std::shared_ptr<Value> operator*(const std::shared_ptr<Value> &lhs, double rhs);
+
+// Mixins for Subtraction
+std::shared_ptr<Value> operator-(double lhs, const std::shared_ptr<Value> &rhs);
+std::shared_ptr<Value> operator-(const std::shared_ptr<Value> &lhs, double rhs);
+
+// Mixins for Division
+std::shared_ptr<Value> operator/(double lhs, const std::shared_ptr<Value> &rhs);
+std::shared_ptr<Value> operator/(const std::shared_ptr<Value> &lhs, double rhs);
